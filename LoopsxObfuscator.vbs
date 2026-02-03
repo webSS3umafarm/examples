@@ -31,11 +31,12 @@ Set oShell = CreateObject("WScript.Shell")
 		Function obfuscateHex(i)
 Dim paddedHex  :  paddedHex = "" 
  Do While Len(i) > 0
-	paddedHex = paddedHex & Left(i, 2) & String(1, "0")
+	paddedHex = paddedHex & Left(i, 2) & String(Skip, "0")
 	i = Mid(i, 1 + 2)
-	step = (step XOR -1) - 1  ' sets bits to 1111 
-    Skip = (step - step) 
-	msgbox("skip: " & Abs(skip)) & "step: " & Abs(Steps)
+  Step = Step + 1
+  Skip = r * (Sin(CInt(step) / r) + 1)
+  	msgbox("skip: " & CInt(skip) & " step: " & CInt(Step))
+
  Loop
 	step = 0 
 '	Skip = Abs(r * (Sin(step / 10 + 1))) 
