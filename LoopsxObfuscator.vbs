@@ -28,7 +28,7 @@ Set oShell = CreateObject("WScript.Shell")
 	Dim i, paddedHex, Skip, Step, luckManip : Randomize
  step = 0 
  Skip = 0
- luckManip = (Rnd * 18)
+ luckManip = (Rnd * 10)
   luckManip = luckManip + 1 : r = luckManip 
 ' 11
  Skip = Abs(r * (Sin(step / 10 + 1)))
@@ -37,10 +37,14 @@ Set oShell = CreateObject("WScript.Shell")
 		Function obfuscateHex(i)
 Dim paddedHex  :  paddedHex = "" 
  Do While Len(i) > 0
-	paddedHex = paddedHex & Left(i, 2) & String(Abs(Skip), "0")
+	paddedHex = paddedHex & Left(i, 2) & String(Abs(skip), "0")
 	 i = Mid(i, 1 + 2)
-  Step = Step + 1
-  Skip = r * (Sin(step / 10)) + 1
+  Step = (step XOR - 1) * - 1
+  ' XOR val is -1 for step = step so that it counts up (XOR 1 does not work) 
+  Skip = (step + step)
+  step = skip
+  Skip = Int(r * (Sin(step / r + 1)) + 1)
+  MsgBox("hi: " &Abs(skip))
  Loop
 	step = 0 
 '	Skip = Abs(r * (Sin(step / 10 + 1))) 
