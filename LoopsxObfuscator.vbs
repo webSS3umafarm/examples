@@ -17,14 +17,6 @@
 
 	Dim oShell
 Set oShell = CreateObject("WScript.Shell") 
-    
-'    paddedHex = paddedHex & Left(i, 2) & String(Skip, "0")
-
-
-MsgBox "Decoded chars back in. Amount (chars): "& Len(paddedHex) & "| " & Abs(step) ' debug
-
-
-
 	Dim i, paddedHex, Skip, Step, luckManip : Randomize
  step = 0 
  Skip = 0
@@ -39,10 +31,11 @@ MsgBox "Decoded chars back in. Amount (chars): "& Len(paddedHex) & "| " & Abs(st
 		Function obfuscateHex(i)
 Dim paddedHex  :  paddedHex = "" 
  Do While Len(i) > 0
-	paddedHex = paddedHex & Left(i, 2) & String(Skip, "0")
+	paddedHex = paddedHex & Left(i, 2) & String(1, "0")
 	i = Mid(i, 1 + 2)
-	step = (step XOR -1) - 1
-    Skip = Abs(step + step) + 1
+	step = (step XOR -1) - 1  ' sets bits to 1111 
+    Skip = (step - step) 
+	msgbox("skip: " & Abs(skip)) & "step: " & Abs(Steps)
  Loop
 	step = 0 
 '	Skip = Abs(r * (Sin(step / 10 + 1))) 
@@ -53,3 +46,21 @@ Dim paddedHex  :  paddedHex = ""
   '  There is also "Do until" and that would do the loop until i = "", but "<>" is a != 
   ' 	Do while i <> "" works here and was used before reworking the script at the end of its development
   ' This loop runs until i != "", and sets the variable i to i at the third position (hex is in pairs). It can end because if mid() goes out of bounds, it will return empty which means the condition has been met and without missing data/end because the script does this after the other logic, and hex comes in pairs. 
+
+	For step = (Sin(step / 10) + 1) To 2
+  ' A "for" loop. A for loop will increment the var fed to it by 1 each time using Next, and the variable (int) can be referenced from within that loop to find out it's value. The for loop will also take the var it is given and set it to an initial 0 before it is set (on the right side), but it can do math. It does not round up. Here, "next" is used as the incrementer. 
+  MsgBox("1223123: " &Abs(step))
+  step = 0 : i = obfuscateHex(i) 
+    MsgBox("1223123: " &step)
+  
+  step = Skip
+  Skip = r * (Sin(step / 10 + 1))
+  '	MsgBox("hi" &Skip) 
+  
+  Step = (step XOR -1) - 1
+  Skip = step + step
+  ' XOR val is -1 for step = step so that it counts up (XOR 1 does not work) 
+	'MsgBox("hi: (steps) " &Abs(step))
+  Next
+ 
+Skip = r * (Sin(step / 10 + 1))
